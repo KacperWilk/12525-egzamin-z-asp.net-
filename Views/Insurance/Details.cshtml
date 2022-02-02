@@ -1,0 +1,65 @@
+﻿@model SkladkaUbezpieczenie.Models.Insurance
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Insurance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearlyLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearlyLength)
+        </dd>
+
+        <dt>
+            Monthly Payment :
+        </dt>
+
+        <dd>
+            @{
+                int age = DateTime.Today.Year - Model.BirthDate.Year;
+                double ageDouble = Convert.ToDouble(age);
+
+                Double MonthlyPayment = (((1 + (ageDouble * 0.015) * Convert.ToDouble(Model.Price)) / Convert.ToDouble(Model.YearlyLength)) / 12);
+            }
+            @MonthlyPayment
+        </dd>
+        
+        <button class="btn btn-primary">@Html.ActionLink("Save", "Create")</button>
+
+    </dl>
+</div>
+<p>
+</p>
