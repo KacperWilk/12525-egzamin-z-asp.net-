@@ -28,13 +28,26 @@ namespace SkladkaUbezpieczenie.Controllers
         public ActionResult Create(Insurance insurance)
         {
             insurance.Id = insurances.Count + 1;
-            insurances.Add(insurance);
-            return RedirectToAction("Details", new { id = insurance.Id });
+            return RedirectToAction("Details", new { id = insurance.Id, email = insurance.Email, birthdate = insurance.BirthDate, price = insurance.Price, yearlylength = insurance.YearlyLength });
+
+        }
+        public ActionResult Confirm(int id, string email, DateTime birthdate, double price, double yearlylength)
+        {
+            Insurance toConfirmInsurance = new Insurance()
+                {Id = id, Email = email, BirthDate = birthdate, Price = price, YearlyLength = yearlylength};
+            insurances.Add(toConfirmInsurance);
+
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, string email, DateTime birthdate, double price, double yearlylength)
         {
-            return View(insurances.FirstOrDefault(x => x.Id == id));
+            ViewBag.id = id;
+            ViewBag.email = email;
+            ViewBag.birthdate = birthdate;
+            ViewBag.price = price;
+            ViewBag.yearlylength = yearlylength;
+            return View("Details");
         }
 
     }

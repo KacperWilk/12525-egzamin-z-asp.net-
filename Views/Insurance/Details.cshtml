@@ -12,35 +12,35 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            Email :
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @ViewBag.email
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+            Birth Date : 
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @ViewBag.birthdate
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            Price
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)$
+            @ViewBag.price $
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.YearlyLength)
+            Yearly Length :
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.YearlyLength)
+            @ViewBag.yearlylength
         </dd>
 
         <dt>
@@ -49,16 +49,16 @@
 
         <dd>
             @{
-                int age = DateTime.Today.Year - Model.BirthDate.Year;
-                double ageDouble = Convert.ToDouble(age);
+                double age = DateTime.Today.Year - ViewBag.birthdate.Year;
 
-                Double MonthlyPayment = (((1 + (ageDouble * 0.015) * Convert.ToDouble(Model.Price)) / Convert.ToDouble(Model.YearlyLength)) / 12);
+                Double MonthlyPayment = (((1 + (age * 0.015) * Convert.ToDouble(ViewBag.price)) / Convert.ToDouble(ViewBag.yearlylength)) / 12);
             }
             @MonthlyPayment $
         </dd>
 
     </dl>
-    <a href="@Url.Action("Index", "Insurance")"><button class="btn btn-primary">Accept this offer</button></a>
+
+    <a href="@Url.Action("Confirm", "Insurance", new { id = ViewBag.id, email = ViewBag.email, birthdate = ViewBag.birthdate, price = ViewBag.price, yearlylength = ViewBag.yearlylength })"><button class="btn btn-primary">Accept this offer</button></a>
 
 </div>
 <p>
