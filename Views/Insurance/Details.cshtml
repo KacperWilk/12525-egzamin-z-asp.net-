@@ -32,7 +32,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Price)$
         </dd>
 
         <dt>
@@ -54,12 +54,12 @@
 
                 Double MonthlyPayment = (((1 + (ageDouble * 0.015) * Convert.ToDouble(Model.Price)) / Convert.ToDouble(Model.YearlyLength)) / 12);
             }
-            @MonthlyPayment
+            @MonthlyPayment $
         </dd>
-        
-        <button class="btn btn-primary">@Html.ActionLink("Save", "Create")</button>
 
     </dl>
+    <a href="@Url.Action("Index", "Insurance")"><button class="btn btn-primary">Accept this offer</button></a>
+
 </div>
 <p>
 </p>
